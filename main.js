@@ -88,20 +88,20 @@ stampaOgniSecondo('ciao')
 
 
 
-function creaContatoreAutomatico(intervallo) {
-    let contatore = 0;
+// function creaContatoreAutomatico(intervallo) {
+//     let contatore = 0;
 
-    return () => {
-        setInterval(() => {
-            contatore++;
-            console.log(contatore);
-        }, intervallo);
-    };
-}
+//     return () => {
+//         setInterval(() => {
+//             contatore++;
+//             console.log(contatore);
+//         }, intervallo);
+//     };
+// }
 
-const cont = creaContatoreAutomatico(1000);
+// const cont = creaContatoreAutomatico(1000);
 
-cont()
+// cont()
 
 
 
@@ -126,7 +126,6 @@ eseguiEferma('ciao', 1000, 6000)
 
 
 
-
 // 🎯 Snack 8 (Bonus)
 // Crea una funzione che simula un conto alla rovescia
 // Scrivi una funzione contoAllaRovescia che accetta un numero n e stampa il conto alla rovescia da n a 0, con un intervallo di 1 secondo tra ogni numero. Quando arriva a 0, stampa "Tempo scaduto!" e interrompe il timer.
@@ -140,6 +139,27 @@ eseguiEferma('ciao', 1000, 6000)
 // 1
 // Tempo scaduto!
 
+
+function contoAllaRovescia(n) {
+    let contatore = n;
+    return () => {
+        const intervallo = setInterval(() => {
+            contatore--;
+            console.log(contatore);
+
+            if (contatore === 0) {
+                clearInterval(intervallo)
+                console.log('Tempo scaduto nuovo');
+
+            }
+
+        }, 1000)
+    }
+}
+
+const startConto = contoAllaRovescia(10)
+
+startConto()
 
 
 
@@ -159,8 +179,33 @@ eseguiEferma('ciao', 1000, 6000)
 // Operazione 2
 // Operazione 3
 
+operazioni =
+    [
+        () => console.log("prima operazione"),
+        () => console.log("seconda operazione"),
+        () => console.log("terza operazione")
+    ]
 
 
+
+function sequenzaOperazioni(arr, tempoInt) {
+
+    let i = 0
+
+
+    const intervallo = setInterval(() => {
+        arr[i]();
+        indice++
+
+        if (i === arr.length) {
+            clearInterval(intervallo)
+        }
+
+
+    }, tempoInt)
+
+}
+sequenzaOperazioni(operazioni, 2000)
 
 
 // 🎯 Snack 10 (Bonus)
@@ -169,4 +214,5 @@ eseguiEferma('ciao', 1000, 6000)
 
 // Restituisce una nuova funzione che, quando chiamata ripetutamente, esegue l'operazione originale al massimo una volta ogni n millisecondi.
 // Esempio di utilizzo:
+
 
