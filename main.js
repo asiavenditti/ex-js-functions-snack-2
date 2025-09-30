@@ -44,30 +44,43 @@ const eseguiOperazione = (a, b, callback) => callback(a, b)
 console.log(eseguiOperazione(5, 5, sottrazione));
 
 
-// Esempio d’uso:
-// const somma = (a, b) => a + b;
-// const moltiplica = (a, b) => a * b;
-//
-// const eseguiOperazione = (a, b, operazione) => operazione(a, b);
-//
-// console.log(eseguiOperazione(3, 4, somma)); // 7
-// console.log(eseguiOperazione(3, 4, moltiplica)); // 12
 
-
-
-// 🏆 Snack 4
-// Crea un generatore di funzioni creaTimer
+// 🏆 Snack 4 - Crea un generatore di funzioni creaTimer
 // Scrivi una funzione creaTimer che accetta un tempo (in ms) e restituisce una nuova funzione che avvia un setTimeout per stampare "Tempo scaduto!
 
 
+function creaTimer(tempo) {
+    return () => {
+        setTimeout(() => {
+            console.log('Tempo scaduto');
 
-// 🏆 Snack 5
-// Crea una funzione stampaOgniSecondo con setInterval.
+        }, tempo)
+    }
+}
+
+const timer = creaTimer(1000)
+timer()
+
+
+// 🏆 Snack 5 - Crea una funzione stampaOgniSecondo con setInterval.
+
 // Definisci una funzione che accetta un messaggio e lo stampa ogni secondo.
-
 // Nota: Questa funzione creerà un loop infinito. Interrompilo manualmente o usa clearInterval() in un altro script.
 
+function stampaOgniSecondo(messaggio) {
+    const intervallo = setInterval(() => {
+        console.log(messaggio);
 
+    }, 1000)
+
+    setTimeout(() => {
+        clearInterval(intervallo)
+        console.log('fine');
+
+    }, 5000)
+}
+
+stampaOgniSecondo('ciao')
 
 // 🏆 Snack 6
 // Crea un contatore automatico con setInterval
@@ -75,9 +88,41 @@ console.log(eseguiOperazione(5, 5, sottrazione));
 
 
 
+function creaContatoreAutomatico(intervallo) {
+    let contatore = 0;
+
+    return () => {
+        setInterval(() => {
+            contatore++;
+            console.log(contatore);
+        }, intervallo);
+    };
+}
+
+const cont = creaContatoreAutomatico(1000);
+
+cont()
+
+
+
 // 🏆 Snack 7
 // Crea una funzione che ferma un timer dopo un certo tempo
 // Scrivi una funzione eseguiEferma che accetta un messaggio, un tempo di avvio e un tempo di stop. Il messaggio deve essere stampato a intervalli regolari, ma si deve fermare dopo il tempo di stop.
+
+function eseguiEferma(messaggio, tempoAvvio, tempoStop) {
+    const intervallo = setInterval(() => {
+        console.log(messaggio);
+
+
+    }, tempoAvvio)
+    const stop = setTimeout(() => {
+        clearInterval(intervallo);
+
+    }, tempoStop)
+
+}
+
+eseguiEferma('ciao', 1000, 6000)
 
 
 
@@ -124,3 +169,4 @@ console.log(eseguiOperazione(5, 5, sottrazione));
 
 // Restituisce una nuova funzione che, quando chiamata ripetutamente, esegue l'operazione originale al massimo una volta ogni n millisecondi.
 // Esempio di utilizzo:
+
